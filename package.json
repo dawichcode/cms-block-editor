@@ -36,16 +36,16 @@
     "embeds",
     "responsive"
   ],
-  "author": "Your Name <your.email@example.com>",
+  "author": "Samuel Clinton<samuelclinton975@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/cms-block-editor.git"
+    "url": "https://github.com/dawichcode/cms-block-editor.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/cms-block-editor/issues"
+    "url": "https://github.com/dawichcode/cms-block-editor/issues"
   },
-  "homepage": "https://github.com/yourusername/cms-block-editor#readme",
+  "homepage": "https://github.com/dawichcode/cms-block-editor#readme",
   "peerDependencies": {
     "react": ">=17",
     "react-dom": ">=17"
