@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { CMSBlockEditor, CMSRenderer } from '@cms/cms-block-editor';
-import './App.css';
+import { CMSBlockEditor, CMSRenderer } from 'cms-block-editor';
 
 function App() {
   const [activeTab, setActiveTab] = useState<'basic' | 'persistence' | 'styled' | 'renderer'>('basic');
