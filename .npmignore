@@ -1,0 +1,30 @@
+# Source files
+src/
+tsconfig.json
+tsup.config.ts
+
+# Example app
+example-app/
+
+# Examples
+examples/
+
+# Documentation (keep only essential docs)
+PROGRESS-REPORT.md
+FEATURES.md
+QUICKSTART.md
+WORDPRESS-FEATURES.md
+
+# Development files
+node_modules/
+.DS_Store
+.vscode/
+*.log
+*.lock
+
+# Git
+.git/
+.gitignore
+
+# Build artifacts (keep only dist)
+*.tsbuildinfo

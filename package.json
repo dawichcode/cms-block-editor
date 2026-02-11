@@ -1,0 +1,68 @@
+{
+  "name": "cms-block-editor",
+  "version": "1.0.0",
+  "description": "A powerful, feature-rich block editor for CMS applications built with Lexical and React. Includes sections, embeds, images, layouts, and more.",
+  "main": "dist/index.mjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.mts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    },
+    "./styles": "./dist/index.css"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "cms",
+    "editor",
+    "block-editor",
+    "lexical",
+    "react",
+    "wysiwyg",
+    "rich-text",
+    "content-editor",
+    "gutenberg",
+    "sections",
+    "embeds",
+    "responsive"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/cms-block-editor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/cms-block-editor/issues"
+  },
+  "homepage": "https://github.com/yourusername/cms-block-editor#readme",
+  "peerDependencies": {
+    "react": ">=17",
+    "react-dom": ">=17"
+  },
+  "dependencies": {
+    "@lexical/code": "^0.15.0",
+    "@lexical/html": "^0.15.0",
+    "@lexical/list": "^0.15.0",
+    "@lexical/react": "^0.15.0",
+    "@lexical/rich-text": "^0.15.0",
+    "@lexical/link": "^0.15.0",
+    "lexical": "^0.15.0",
+    "react-icons": "^5.5.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.13",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}
