@@ -2,6 +2,7 @@ import { HeadingNode, QuoteNode as LexicalQuoteNode } from "@lexical/rich-text";
 import { ListNode, ListItemNode } from "@lexical/list";
 import { AutoLinkNode, LinkNode as LexicalLinkNode } from "@lexical/link";
 import { CodeNode } from "@lexical/code";
+import { TableNode, TableCellNode, TableRowNode } from "@lexical/table";
 import { ImageNode } from "../blocks/ImageNode";
 import { QuoteNode } from "../blocks/QuoteNode";
 import { ColumnsNode, ColumnNode } from "../blocks/ColumnsNode";
@@ -35,6 +36,9 @@ export function createEditorConfig(value?: string) {
       AutoLinkNode,
       LexicalLinkNode,
       CodeNode,
+      TableNode,
+      TableCellNode,
+      TableRowNode,
       ImageNode,
       QuoteNode,
       ColumnsNode,

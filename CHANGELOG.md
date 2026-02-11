@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.6] - 2024-02-11
+
+### Added
+- Table support with visual builder
+- Interactive table insertion modal
+- Configurable rows (1-20) and columns (1-10)
+- Header row styling option
+- Quick preset buttons (3×3, 5×3, 4×4, 10×5)
+- Live table preview in modal
+- Full table editing capabilities (add/remove rows/columns, merge cells)
+- Professional table styling (purple headers, striped rows, hover effects)
+- Responsive table design with horizontal scroll on mobile
+- TABLE-GUIDE.md documentation
+
 ## [1.0.0] - 2024-02-11
 
 ### Added
@@ -109,7 +123,7 @@ All notable changes to this project will be documented in this file.
 ## Future Roadmap
 
 ### Planned Features
-- [ ] Table support
+- [x] Table support (Added in v1.0.6)
 - [ ] Advanced image editing (crop, filters)
 - [ ] Video upload support
 - [ ] Custom block creation API

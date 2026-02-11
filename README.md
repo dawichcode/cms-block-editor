@@ -14,6 +14,7 @@ A powerful, feature-rich block editor for CMS applications built with Lexical an
 🖼️ **Images** - Upload, resize, and drag-and-drop images  
 🎥 **Embeds** - YouTube, Facebook, Instagram, Twitter, TikTok, Vimeo, Spotify, SoundCloud  
 🔗 **Links** - Custom link insertion with labels and options  
+📊 **Tables** - Visual table builder with configurable rows/columns and professional styling  
 🎨 **Styling** - Background colors, images, gradients, opacity controls  
 📱 **Responsive** - Mobile-first design with automatic responsive behavior  
 💾 **Export/Import** - HTML and Markdown support  
@@ -94,6 +95,7 @@ Read-only renderer for displaying saved content.
 - **Images**: Upload from computer, resize with 8-point handles, drag-and-drop positioning
 - **YouTube**: Embed videos with custom sizing
 - **Embeds**: Support for 8+ platforms with automatic URL detection
+- **Tables**: Visual builder with configurable dimensions, header rows, and professional styling
 
 ### Sections
 10 pre-designed templates:
@@ -250,6 +252,7 @@ Comprehensive guides available:
 - [Section Editing Guide](./SECTION-EDITING-GUIDE.md)
 - [Background Image Guide](./BACKGROUND-IMAGE-GUIDE.md)
 - [Embed Guide](./EMBED-GUIDE.md)
+- [Table Guide](./TABLE-GUIDE.md)
 - [Responsive Rendering Guide](./RESPONSIVE-RENDERING-GUIDE.md)
 
 ## Contributing

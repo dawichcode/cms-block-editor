@@ -4,6 +4,7 @@ import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { LinkPlugin as LexicalLinkPlugin } from "@lexical/react/LexicalLinkPlugin";
+import { TablePlugin as LexicalTablePlugin } from "@lexical/react/LexicalTablePlugin";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import SlashCommandPlugin from "../plugins/SlashCommandPlugin";
 import ToolbarPlugin from "../plugins/ToolbarPlugin";
@@ -11,6 +12,7 @@ import ImageUploadPlugin from "../plugins/ImageUploadPlugin";
 import LinkPlugin from "../plugins/LinkPlugin";
 import SectionEditorPlugin from "../plugins/SectionEditorPlugin";
 import EmbedPlugin from "../plugins/EmbedPlugin";
+import TablePlugin from "../plugins/TablePlugin";
 import "../styles/editor.css";
 
 export default function EditorShell({ onChange }: { onChange?: (state: any) => void }) {
@@ -25,11 +27,13 @@ export default function EditorShell({ onChange }: { onChange?: (state: any) => v
       <HistoryPlugin />
       <ListPlugin />
       <LexicalLinkPlugin />
+      <LexicalTablePlugin />
       <SlashCommandPlugin />
       <ImageUploadPlugin />
       <LinkPlugin />
       <SectionEditorPlugin />
       <EmbedPlugin />
+      <TablePlugin />
       {onChange && (
         <OnChangePlugin
           onChange={(editorState) => {

@@ -21,6 +21,7 @@ import ColorPickerPlugin from "./ColorPickerPlugin";
 import SpacingPlugin from "./SpacingPlugin";
 import ExportImportPlugin from "./ExportImportPlugin";
 import SectionCreatorPlugin from "./SectionCreatorPlugin";
+import TablePlugin from "./TablePlugin";
 import { useState, useCallback, useEffect } from "react";
 import { 
   MdUndo, 
@@ -453,6 +454,9 @@ export default function ToolbarPlugin() {
 
       {/* Section Creator */}
       <SectionCreatorPlugin />
+
+      {/* Table */}
+      <TablePlugin />
 
       <div className="cms-toolbar-divider" />
 
