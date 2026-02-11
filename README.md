@@ -4,6 +4,7 @@ A powerful, feature-rich block editor for CMS applications built with Lexical an
 
 [![npm version](https://img.shields.io/npm/v/cms-block-editor.svg)](https://www.npmjs.com/package/cms-block-editor)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+<img width="1440" height="813" alt="image" src="https://github.com/user-attachments/assets/be60464e-7fd3-4efa-b340-1761b68bfe4f" />
 
 ## Features
 
