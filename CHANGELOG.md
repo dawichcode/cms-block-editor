@@ -134,4 +134,4 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-For more information, visit [GitHub Repository](https://github.com/yourusername/cms-block-editor)
+For more information, visit [GitHub Repository](https://github.com/dawichcode/cms-block-editor)
