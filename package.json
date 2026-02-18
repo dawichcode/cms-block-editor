@@ -1,6 +1,6 @@
 {
   "name": "cms-block-editor",
-  "version": "1.0.8",
+  "version": "1.0.7",
   "description": "A powerful, feature-rich block editor for CMS applications built with Lexical and React. Includes sections, embeds, images, layouts, and more.",
   "main": "dist/index.mjs",
   "module": "dist/index.mjs",
