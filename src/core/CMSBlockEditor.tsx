@@ -1,16 +1,27 @@
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
-import EditorShell from "./EditorShell";
+import {EditorShell} from "./EditorShell";
 import { createEditorConfig } from "./EditorConfig";
 
 interface CMSBlockEditorProps {
   value?: string;
   onChange?: (state: any) => void;
+  onImageAdded?: (file: File) => Promise<string>;
+  useBase64Url?: boolean;
 }
 
-export default function CMSBlockEditor({ value, onChange }: CMSBlockEditorProps) {
+export default function CMSBlockEditor({ 
+  value, 
+  onChange, 
+  onImageAdded, 
+  useBase64Url = true 
+}: CMSBlockEditorProps) {
   return (
     <LexicalComposer initialConfig={createEditorConfig(value)}>
-      <EditorShell onChange={onChange} />
+      <EditorShell 
+        onChange={onChange} 
+        onImageAdded={onImageAdded} 
+        useBase64Url={useBase64Url} 
+      />
     </LexicalComposer>
   );
 }

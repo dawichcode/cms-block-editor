@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.7] - 2024-02-18
+
+### Added
+- Custom image upload handler support via `onImageAdded` prop
+- `onImageAdded?: (file: File) => Promise<string>` callback for server-side image uploads
+- `useBase64Url?: boolean` prop to control image encoding behavior (default: `true`)
+- Flexible image handling: custom upload, base64 encoding, or disabled
+- Example implementation in demo app showing server upload integration
+
+### Changed
+- ImageUploadPlugin now supports async image upload workflows
+- Enhanced image handling with better error handling and logging
+
+### Documentation
+- Updated README with custom image upload examples
+- Added API documentation for new props
+- Included server upload integration example
+
 ## [1.0.6] - 2024-02-11
 
 ### Added
@@ -124,6 +142,7 @@ All notable changes to this project will be documented in this file.
 
 ### Planned Features
 - [x] Table support (Added in v1.0.6)
+- [x] Custom image upload handler (Added in v1.0.7)
 - [ ] Advanced image editing (crop, filters)
 - [ ] Video upload support
 - [ ] Custom block creation API

@@ -3,7 +3,13 @@ import { useEffect } from "react";
 import { $getSelection, $isRangeSelection, COMMAND_PRIORITY_LOW, DRAGOVER_COMMAND, DROP_COMMAND } from "lexical";
 import { ImageNode } from "../blocks/ImageNode";
 
-export default function ImageUploadPlugin() {
+export function ImageUploadPlugin({
+  onImageAdded,
+  useBase64Url = true
+}: {
+  onImageAdded?: (file: File) => Promise<string>;
+  useBase64Url?: boolean;
+}) {
   const [editor] = useLexicalComposerContext();
 
   useEffect(() => {
@@ -20,35 +26,53 @@ export default function ImageUploadPlugin() {
     // Handle drop
     const removeDropListener = editor.registerCommand(
       DROP_COMMAND,
-      (event: DragEvent) => {
+      //@ts-ignore
+      async (event: DragEvent) => {
         event.preventDefault();
-        
+
         const files = event.dataTransfer?.files;
         if (files && files.length > 0) {
           const file = files[0];
-          
+
           // Check if it's an image
           if (file.type.startsWith("image/")) {
-            const reader = new FileReader();
-            
-            reader.onload = (e) => {
-              const url = e.target?.result as string;
-              const alt = file.name.replace(/\.[^/.]+$/, "");
-              
-              editor.update(() => {
-                const selection = $getSelection();
-                if ($isRangeSelection(selection)) {
-                  const imageNode = new ImageNode(url, alt);
-                  selection.insertNodes([imageNode]);
-                }
+            let url: string;
+            const alt = file.name.replace(/\.[^/.]+$/, "");
+
+            // Use custom upload handler if provided
+            if (onImageAdded) {
+              try {
+                url = await onImageAdded(file);
+              } catch (error) {
+                console.error("Error uploading image:", error);
+                return false;
+              }
+            } else if (useBase64Url) {
+              // Fall back to base64 encoding
+              url = await new Promise<string>((resolve) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                  resolve(e.target?.result as string);
+                };
+                reader.readAsDataURL(file);
               });
-            };
-            
-            reader.readAsDataURL(file);
+            } else {
+              console.warn("No image upload handler provided and useBase64Url is false");
+              return false;
+            }
+
+            editor.update(() => {
+              const selection = $getSelection();
+              if ($isRangeSelection(selection)) {
+                const imageNode = new ImageNode(url, alt);
+                selection.insertNodes([imageNode]);
+              }
+            });
+
             return true;
           }
         }
-        
+
         return false;
       },
       COMMAND_PRIORITY_LOW
@@ -58,7 +82,7 @@ export default function ImageUploadPlugin() {
       removeDragOverListener();
       removeDropListener();
     };
-  }, [editor]);
+  }, [editor, onImageAdded, useBase64Url]);
 
   return null;
 }

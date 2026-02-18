@@ -71,6 +71,8 @@ Main editor component with full editing capabilities.
 **Props:**
 - `value?: string` - Initial editor state (JSON string)
 - `onChange?: (state: any) => void` - Callback fired when content changes
+- `onImageAdded?: (file: File) => Promise<string>` - Custom image upload handler that returns the image URL
+- `useBase64Url?: boolean` - Use base64 encoding for images (default: `true`)
 
 ### CMSRenderer
 
@@ -92,7 +94,7 @@ Read-only renderer for displaying saved content.
 - Code blocks
 
 ### Media
-- **Images**: Upload from computer, resize with 8-point handles, drag-and-drop positioning
+- **Images**: Upload from computer, resize with 8-point handles, drag-and-drop positioning, custom upload handler support
 - **YouTube**: Embed videos with custom sizing
 - **Embeds**: Support for 8+ platforms with automatic URL detection
 - **Tables**: Visual builder with configurable dimensions, header rows, and professional styling
@@ -129,6 +131,47 @@ Read-only renderer for displaying saved content.
 - Copy to clipboard
 
 ## Advanced Usage
+
+### Custom Image Upload
+
+Upload images to your server instead of using base64 encoding:
+
+```tsx
+import { CMSBlockEditor } from 'cms-block-editor';
+
+function Editor() {
+  const [content, setContent] = useState('');
+
+  const handleImageUpload = async (file: File): Promise<string> => {
+    // Upload to your server
+    const formData = new FormData();
+    formData.append('image', file);
+    
+    const response = await fetch('/api/upload', {
+      method: 'POST',
+      body: formData,
+    });
+    
+    const data = await response.json();
+    return data.url; // Return the uploaded image URL
+  };
+
+  return (
+    <CMSBlockEditor 
+      value={content}
+      onChange={(state) => setContent(JSON.stringify(state))}
+      onImageAdded={handleImageUpload}
+      useBase64Url={false}
+    />
+  );
+}
+```
+
+**Image Upload Options:**
+
+- **With `onImageAdded`**: Provide a custom upload handler that uploads the file to your server and returns the URL
+- **With `useBase64Url={true}`** (default): Images are encoded as base64 strings (no server upload needed)
+- **With `useBase64Url={false}` and no `onImageAdded`**: Image upload will be disabled
 
 ### With Persistence
 

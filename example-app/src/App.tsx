@@ -77,6 +77,19 @@ function App() {
                 setContent(content);
                 console.log(content);
               }}
+              onImageAdded={async (file: File) => {
+                // Example: Upload to your server
+                // const formData = new FormData();
+                // formData.append('image', file);
+                // const response = await fetch('/api/upload', { method: 'POST', body: formData });
+                // const data = await response.json();
+                // return data.url;
+                
+                // For demo: return a placeholder URL
+                console.log('Image uploaded:', file.name);
+                return `https://via.placeholder.com/800x400?text=${encodeURIComponent(file.name)}`;
+              }}
+              useBase64Url={false}
             />
             <div className="info-box">
               <strong>Content length:</strong> {content?.length || 0} characters
@@ -166,10 +179,10 @@ function App() {
       </div>
 
 {rendererContent && (
-                  <CMSRenderer content={rendererContent} className="demo-renderer" />
+                  <CMSRenderer content={JSON.stringify({"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"Leveraging Istio and Spire to create a cryptographically secure service identity mesh across hybrid environments.","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}})} className="demo-renderer" />
                 )}
       <footer className="app-footer">
-
+ <CMSRenderer content={JSON.stringify({"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"Leveraging Istio and Spire to create a cryptographically secure service identity mesh across hybrid environments.","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}})} className="demo-renderer" />
         <p>Built with Lexical • Try typing <code>/</code> for commands</p>
       </footer>
     </div>
