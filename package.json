@@ -1,6 +1,6 @@
 {
   "name": "cms-block-editor",
-  "version": "1.0.10",
+  "version": "1.0.9",
   "description": "A powerful, feature-rich block editor for CMS applications built with Lexical and React. Includes sections, embeds, images, layouts, and more.",
   "main": "dist/index.mjs",
   "module": "dist/index.mjs",
@@ -20,7 +20,7 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "prepublishOnly": "npm version patch && npm run build"
+    "prepublishOnly": "npm login && npm version patch && npm run build"
   },
   "keywords": [
     "cms",
