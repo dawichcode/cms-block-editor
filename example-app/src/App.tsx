@@ -1,14 +1,22 @@
 import { useState } from 'react';
-import { CMSBlockEditor, CMSRenderer } from 'cms-block-editor';
+import { 
+  CMSBlockEditor, 
+  CMSRenderer, 
+  ThemeProvider, 
+  ThemeSwitcher,
+  useTheme 
+} from 'cms-block-editor';
 
-function App() {
-  const [activeTab, setActiveTab] = useState<'basic' | 'persistence' | 'styled' | 'renderer'>('basic');
+function EditorDemo() {
+  const { theme } = useTheme();
+  const [activeTab, setActiveTab] = useState<'basic' | 'themes' | 'media' | 'persistence' | 'renderer'>('basic');
   const [content, setContent] = useState<string | undefined>(undefined);
+  const [themesContent, setThemesContent] = useState<string | undefined>(undefined);
+  const [mediaContent, setMediaContent] = useState<string | undefined>(undefined);
   const [persistedContent, setPersistedContent] = useState<string | undefined>(() => {
     const saved = localStorage.getItem('cms-content');
     return saved || undefined;
   });
-  const [styledContent, setStyledContent] = useState<string | undefined>(undefined);
   const [rendererContent, setRendererContent] = useState<string | undefined>(undefined);
   const [showPreview, setShowPreview] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
@@ -29,11 +37,30 @@ function App() {
     setPersistedContent(undefined);
   };
 
+  const handleImageUpload = async (file: File): Promise<string> => {
+    console.log('Image uploaded:', file.name, file.size);
+    // For demo: return a placeholder URL
+    return `https://via.placeholder.com/800x400?text=${encodeURIComponent(file.name)}`;
+  };
+
+  const handleVideoUpload = async (file: File): Promise<string> => {
+    console.log('Video uploaded:', file.name, file.size);
+    // For demo: use object URL (not recommended for production)
+    return URL.createObjectURL(file);
+  };
+
   return (
     <div className="app">
       <header className="app-header">
-        <h1>🎨 CMS Block Editor Demo</h1>
-        <p>Explore different implementations of the block editor</p>
+        <div className="header-content">
+          <div>
+            <h1>🎨 CMS Block Editor Demo</h1>
+            <p>Explore all features with live examples</p>
+          </div>
+          <div className="header-actions">
+            <ThemeSwitcher />
+          </div>
+        </div>
       </header>
 
       <div className="tabs">
@@ -41,25 +68,31 @@ function App() {
           className={activeTab === 'basic' ? 'active' : ''}
           onClick={() => setActiveTab('basic')}
         >
-          Basic
+          📝 Basic
+        </button>
+        <button 
+          className={activeTab === 'themes' ? 'active' : ''}
+          onClick={() => setActiveTab('themes')}
+        >
+          🎨 Themes
+        </button>
+        <button 
+          className={activeTab === 'media' ? 'active' : ''}
+          onClick={() => setActiveTab('media')}
+        >
+          🖼️ Media
         </button>
         <button 
           className={activeTab === 'persistence' ? 'active' : ''}
           onClick={() => setActiveTab('persistence')}
         >
-          With Persistence
-        </button>
-        <button 
-          className={activeTab === 'styled' ? 'active' : ''}
-          onClick={() => setActiveTab('styled')}
-        >
-          Custom Styled
+          💾 Persistence
         </button>
         <button 
           className={activeTab === 'renderer' ? 'active' : ''}
           onClick={() => setActiveTab('renderer')}
         >
-          Renderer Demo
+          👁️ Renderer
         </button>
       </div>
 
@@ -72,39 +105,80 @@ function App() {
             </div>
             <CMSBlockEditor 
               value={content}
-              onChange={(editorState:any) => {
-                const content=JSON.stringify(editorState);
-                setContent(content);
-                console.log(content);
+              onChange={(editorState: any) => {
+                setContent(JSON.stringify(editorState));
               }}
-              onImageAdded={async (file: File) => {
-                // Example: Upload to your server
-                // const formData = new FormData();
-                // formData.append('image', file);
-                // const response = await fetch('/api/upload', { method: 'POST', body: formData });
-                // const data = await response.json();
-                // return data.url;
-                
-                // For demo: return a placeholder URL
-                console.log('Image uploaded:', file.name);
-                return `https://via.placeholder.com/800x400?text=${encodeURIComponent(file.name)}`;
-              }}
-              onVideoAdded={async (file: File) => {
-                // Example: Upload to your server
-                // const formData = new FormData();
-                // formData.append('video', file);
-                // const response = await fetch('/api/upload-video', { method: 'POST', body: formData });
-                // const data = await response.json();
-                // return data.url;
-                
-                // For demo: use object URL (not recommended for production)
-                console.log('Video uploaded:', file.name);
-                return URL.createObjectURL(file);
-              }}
+              onImageAdded={handleImageUpload}
+              onVideoAdded={handleVideoUpload}
               useBase64Url={false}
             />
             <div className="info-box">
+              <strong>Features:</strong> Rich text, headings, lists, links, images, videos, tables, sections
+              <br />
               <strong>Content length:</strong> {content?.length || 0} characters
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'themes' && (
+          <div className="example-section">
+            <div className="example-header">
+              <h2>Theme System Demo</h2>
+              <p>
+                Current theme: <strong>{theme.name}</strong>
+                <br />
+                Try switching themes using the theme switcher in the header!
+              </p>
+            </div>
+            <CMSBlockEditor 
+              value={themesContent}
+              onChange={(editorState: any) => {
+                setThemesContent(JSON.stringify(editorState));
+              }}
+              onImageAdded={handleImageUpload}
+              onVideoAdded={handleVideoUpload}
+            />
+            <div className="info-box">
+              <strong>Available Themes:</strong>
+              <ul>
+                <li><strong>Light Themes:</strong> Light, Ocean, Forest, Sunset, Rose, Minimal</li>
+                <li><strong>Dark Themes:</strong> Dark, Midnight, Dracula, Monokai</li>
+              </ul>
+              <strong>Modes:</strong> Light, Dark, Auto (follows system preference)
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'media' && (
+          <div className="example-section">
+            <div className="example-header">
+              <h2>Media Upload Demo</h2>
+              <p>Upload images and videos with advanced features</p>
+            </div>
+            <CMSBlockEditor 
+              value={mediaContent}
+              onChange={(editorState: any) => {
+                setMediaContent(JSON.stringify(editorState));
+              }}
+              onImageAdded={handleImageUpload}
+              onVideoAdded={handleVideoUpload}
+              useBase64Url={false}
+            />
+            <div className="info-box">
+              <strong>Image Features:</strong>
+              <ul>
+                <li>Drag & drop upload</li>
+                <li>Resize with handles</li>
+                <li>Advanced editing (filters, brightness, contrast, etc.)</li>
+                <li>Click image → Edit button to access filters</li>
+              </ul>
+              <strong>Video Features:</strong>
+              <ul>
+                <li>Drag & drop upload</li>
+                <li>Playback controls (autoplay, loop, mute)</li>
+                <li>Resize support</li>
+                <li>MP4, WebM, OGG formats</li>
+              </ul>
             </div>
           </div>
         )}
@@ -112,7 +186,7 @@ function App() {
         {activeTab === 'persistence' && (
           <div className="example-section">
             <div className="example-header">
-              <h2>With Persistence</h2>
+              <h2>Persistence Demo</h2>
               <p>Content is automatically saved to localStorage. Refresh the page to see it persist!</p>
               <div className="actions">
                 {isSaved && <span className="saved-indicator">✓ Saved</span>}
@@ -122,30 +196,13 @@ function App() {
             <CMSBlockEditor 
               value={persistedContent}
               onChange={handlePersistenceChange}
+              onImageAdded={handleImageUpload}
+              onVideoAdded={handleVideoUpload}
             />
             <div className="info-box">
               <strong>Tip:</strong> Your content is saved automatically after 1 second of inactivity.
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'styled' && (
-          <div className="example-section styled">
-            <div className="example-header">
-              <h2>Custom Styled</h2>
-              <p>Editor with custom theme and styling applied.</p>
-            </div>
-            <div className="custom-editor-wrapper">
-              <CMSBlockEditor 
-                value={styledContent}
-                onChange={(editorState:any) => {
-                  setStyledContent(JSON.stringify(editorState));
-                }}
-              />
-            </div>
-            <div className="content-preview">
-              <h3>Content Stats</h3>
-              <p>Characters: {styledContent?.length || 0}</p>
+              <br />
+              Try refreshing the page to see your content persist!
             </div>
           </div>
         )}
@@ -169,35 +226,68 @@ function App() {
               <>
                 <CMSBlockEditor 
                   value={rendererContent}
-                  onChange={(editorState:any) => {
+                  onChange={(editorState: any) => {
                     setRendererContent(JSON.stringify(editorState));
                   }}
+                  onImageAdded={handleImageUpload}
+                  onVideoAdded={handleVideoUpload}
                 />
                 <div className="info-box">
                   <strong>Tip:</strong> Click "Preview" to see how your content will be rendered.
                 </div>
               </>
             ) : (
-             <>
-              {rendererContent ? (
+              <>
+                {rendererContent ? (
                   <CMSRenderer content={rendererContent} className="demo-renderer" />
                 ) : (
                   <p className="empty-state">No content to preview. Switch to edit mode and add some content!</p>
                 )}
-             </>
+              </>
             )}
           </div>
         )}
       </div>
 
-{rendererContent && (
-                  <CMSRenderer content={JSON.stringify({"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"Leveraging Istio and Spire to create a cryptographically secure service identity mesh across hybrid environments.","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}})} className="demo-renderer" />
-                )}
       <footer className="app-footer">
- <CMSRenderer content={JSON.stringify({"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"Leveraging Istio and Spire to create a cryptographically secure service identity mesh across hybrid environments.","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}})} className="demo-renderer" />
-        <p>Built with Lexical • Try typing <code>/</code> for commands</p>
+        <div className="footer-content">
+          <div className="footer-info">
+            <h3>CMS Block Editor</h3>
+            <p>A powerful, feature-rich block editor built with Lexical and React</p>
+          </div>
+          <div className="footer-features">
+            <h4>Features</h4>
+            <ul>
+              <li>✨ Rich text editing</li>
+              <li>🎨 10 preset themes</li>
+              <li>🖼️ Image editing with filters</li>
+              <li>🎬 Video upload support</li>
+              <li>📊 Tables & sections</li>
+              <li>💾 Export/Import</li>
+            </ul>
+          </div>
+          <div className="footer-links">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="https://github.com/yourusername/cms-block-editor" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+              <li><a href="https://www.npmjs.com/package/cms-block-editor" target="_blank" rel="noopener noreferrer">NPM</a></li>
+              <li><a href="#" onClick={(e) => { e.preventDefault(); alert('Documentation coming soon!'); }}>Documentation</a></li>
+            </ul>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <p>Built with Lexical • Try typing <code>/</code> for commands</p>
+        </div>
       </footer>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider defaultTheme="light" defaultMode="auto">
+      <EditorDemo />
+    </ThemeProvider>
   );
 }
 
