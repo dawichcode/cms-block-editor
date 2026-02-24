@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.9] - 2024-02-20
+
+### Added
+- Comprehensive theme system with 10 preset themes
+- ThemeProvider component for theme management
+- ThemeSwitcher UI component
+- Light and dark mode support with auto-detection
+- Custom theme creation API
+- CSS variables for all theme values
+- Theme persistence with localStorage
+- Preset themes: Light, Dark, Ocean, Forest, Sunset, Rose, Midnight, Dracula, Monokai, Minimal
+- useTheme hook for programmatic theme control
+- THEME-GUIDE.md comprehensive documentation
+
+### Changed
+- All components now use CSS variables for theming
+- Editor styles are now theme-aware
+- Toolbar and modals respect theme colors
+
+### Documentation
+- Added complete theme system guide
+- Custom theme creation examples
+- CSS variable reference
+- Theme switcher integration examples
+
 ## [1.0.8] - 2024-02-19
 
 ### Added
@@ -179,6 +204,7 @@ All notable changes to this project will be documented in this file.
 - [x] Custom image upload handler (Added in v1.0.7)
 - [x] Advanced image editing (crop, filters) (Added in v1.0.7)
 - [x] Video upload support (Added in v1.0.8)
+- [x] Theme system (Added in v1.0.9)
 - [ ] Custom block creation API
 - [ ] Custom block creation API
 - [ ] Collaboration features

@@ -14,5 +14,25 @@ export { OPEN_IMAGE_EDITOR_COMMAND } from "./plugins/ImageEditorPlugin";
 export { VideoNode } from "./blocks/VideoNode";
 export { ImageNode } from "./blocks/ImageNode";
 
+// Export theme system
+export {
+  ThemeProvider,
+  useTheme,
+  ThemeSwitcher,
+  lightTheme,
+  darkTheme,
+  presetThemes,
+  oceanTheme,
+  forestTheme,
+  sunsetTheme,
+  roseTheme,
+  midnightTheme,
+  draculaTheme,
+  monokaiTheme,
+  minimalTheme,
+} from "./themes";
+export type { Theme, ThemeColors, ThemeMode, PresetThemeName } from "./themes";
+
 import "./styles/editor.css";
 import "./styles/renderer.css";
+import "./styles/themes.css";

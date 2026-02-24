@@ -18,6 +18,7 @@ A powerful, feature-rich block editor for CMS applications built with Lexical an
 🔗 **Links** - Custom link insertion with labels and options  
 📊 **Tables** - Visual table builder with configurable rows/columns and professional styling  
 🎨 **Styling** - Background colors, images, gradients, opacity controls  
+🌈 **Themes** - 10 preset themes with light/dark mode and custom theme support  
 📱 **Responsive** - Mobile-first design with automatic responsive behavior  
 💾 **Export/Import** - HTML and Markdown support  
 🎯 **Section Editor** - Full control over section layout, spacing, and styling  
@@ -32,19 +33,21 @@ npm install cms-block-editor
 ## Quick Start
 
 ```tsx
-import { CMSBlockEditor } from 'cms-block-editor';
+import { CMSBlockEditor, ThemeProvider } from 'cms-block-editor';
 import 'cms-block-editor/dist/index.css';
 
 function App() {
   const [content, setContent] = useState('');
 
   return (
-    <CMSBlockEditor 
-      value={content}
-      onChange={(editorState) => {
-        setContent(JSON.stringify(editorState));
-      }}
-    />
+    <ThemeProvider defaultTheme="light" defaultMode="auto">
+      <CMSBlockEditor 
+        value={content}
+        onChange={(editorState) => {
+          setContent(JSON.stringify(editorState));
+        }}
+      />
+    </ThemeProvider>
   );
 }
 ```
@@ -136,6 +139,46 @@ Read-only renderer for displaying saved content.
 - Copy to clipboard
 
 ## Advanced Usage
+
+### Theme System
+
+Use preset themes or create custom ones:
+
+```typescript
+import { CMSBlockEditor, ThemeProvider, ThemeSwitcher } from 'cms-block-editor';
+
+function App() {
+  return (
+    <ThemeProvider defaultTheme="ocean" defaultMode="auto">
+      <div>
+        <ThemeSwitcher />
+        <CMSBlockEditor value={content} onChange={setContent} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+**Available Themes**: light, dark, ocean, forest, sunset, rose, midnight, dracula, monokai, minimal
+
+**Custom Theme**:
+```typescript
+import { Theme, lightTheme } from 'cms-block-editor';
+
+const myTheme: Theme = {
+  ...lightTheme,
+  name: 'my-theme',
+  colors: {
+    ...lightTheme.colors,
+    primary: '#ff6b6b',
+    primaryHover: '#ee5a52',
+  },
+};
+
+<ThemeProvider defaultTheme={myTheme}>
+  <CMSBlockEditor />
+</ThemeProvider>
+```
 
 ### Custom Video Upload
 
@@ -329,6 +372,7 @@ Check out the [example app](./example-app) for a complete implementation with:
 ## Documentation
 
 Comprehensive guides available:
+- [Theme System Guide](./docs/THEME-GUIDE.md) - Complete theming and customization
 - [Video Upload Guide](./docs/VIDEO-GUIDE.md) - Native HTML5 video upload and playback
 - [Image Editing Guide](./docs/IMAGE-EDITING-GUIDE.md) - Advanced image filters and effects
 - [Section Creator Guide](./SECTION-CREATOR-GUIDE.md)
