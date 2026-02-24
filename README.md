@@ -11,7 +11,8 @@ A powerful, feature-rich block editor for CMS applications built with Lexical an
 ✨ **Rich Text Editing** - Full formatting support (bold, italic, underline, headings, lists, etc.)  
 🎨 **Sections** - 10 pre-designed section templates (hero, features, pricing, testimonials, etc.)  
 📐 **Layouts** - Flexbox and CSS Grid support with visual controls  
-🖼️ **Images** - Upload, resize, and drag-and-drop images  
+🖼️ **Images** - Upload, resize, drag-and-drop, and advanced editing with filters  
+🎨 **Image Filters** - 7 adjustable filters with 6 professional presets  
 🎥 **Embeds** - YouTube, Facebook, Instagram, Twitter, TikTok, Vimeo, Spotify, SoundCloud  
 🔗 **Links** - Custom link insertion with labels and options  
 📊 **Tables** - Visual table builder with configurable rows/columns and professional styling  
@@ -94,7 +95,8 @@ Read-only renderer for displaying saved content.
 - Code blocks
 
 ### Media
-- **Images**: Upload from computer, resize with 8-point handles, drag-and-drop positioning, custom upload handler support
+- **Images**: Upload from computer, resize with 8-point handles, drag-and-drop positioning, custom upload handler support, advanced editing with filters
+- **Image Filters**: Brightness, contrast, saturation, blur, grayscale, sepia, hue rotation with 6 presets
 - **YouTube**: Embed videos with custom sizing
 - **Embeds**: Support for 8+ platforms with automatic URL detection
 - **Tables**: Visual builder with configurable dimensions, header rows, and professional styling
@@ -291,6 +293,7 @@ Check out the [example app](./example-app) for a complete implementation with:
 ## Documentation
 
 Comprehensive guides available:
+- [Image Editing Guide](./docs/IMAGE-EDITING-GUIDE.md) - Advanced image filters and effects
 - [Section Creator Guide](./SECTION-CREATOR-GUIDE.md)
 - [Section Editing Guide](./SECTION-EDITING-GUIDE.md)
 - [Background Image Guide](./BACKGROUND-IMAGE-GUIDE.md)

@@ -1,5 +1,6 @@
 import { DecoratorNode, NodeKey, SerializedLexicalNode, Spread, LexicalEditor } from "lexical";
 import React, { JSX, useCallback, useEffect, useRef, useState } from "react";
+import { OPEN_IMAGE_EDITOR_COMMAND } from "../plugins/ImageEditorPlugin";
 
 export type SerializedImageNode = Spread<
   {
@@ -209,6 +210,38 @@ function ImageComponent({
       />
       {isSelected && (
         <>
+          {/* Edit Button */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              editor.dispatchCommand(OPEN_IMAGE_EDITOR_COMMAND, { nodeKey, src });
+            }}
+            style={{
+              position: 'absolute',
+              top: '8px',
+              right: '8px',
+              padding: '8px 16px',
+              background: '#667eea',
+              color: 'white',
+              border: 'none',
+              borderRadius: '6px',
+              fontSize: '13px',
+              fontWeight: '500',
+              cursor: 'pointer',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+              zIndex: 10,
+              transition: 'all 0.2s'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#5568d3';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#667eea';
+            }}
+          >
+            ✏️ Edit
+          </button>
+          
           {/* Corner handles */}
           <div 
             className="image-resize-handle image-resize-handle-nw"

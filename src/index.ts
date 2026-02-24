@@ -7,5 +7,8 @@ export { exportToMarkdown, downloadMarkdown, copyMarkdownToClipboard } from "./u
 export { importFromHTML, appendHTML, loadHTMLFromFile } from "./utils/htmlImport";
 export { importFromMarkdown, loadMarkdownFromFile, pasteMarkdownFromClipboard } from "./utils/markdownImport";
 
+// Export image editor command
+export { OPEN_IMAGE_EDITOR_COMMAND } from "./plugins/ImageEditorPlugin";
+
 import "./styles/editor.css";
 import "./styles/renderer.css";

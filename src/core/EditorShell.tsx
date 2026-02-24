@@ -8,7 +8,8 @@ import { TablePlugin as LexicalTablePlugin } from "@lexical/react/LexicalTablePl
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import SlashCommandPlugin from "../plugins/SlashCommandPlugin";
 import ToolbarPlugin from "../plugins/ToolbarPlugin";
-import {ImageUploadPlugin} from "../plugins/ImageUploadPlugin";
+import { ImageUploadPlugin } from "../plugins/ImageUploadPlugin";
+import ImageEditorPlugin from "../plugins/ImageEditorPlugin";
 import LinkPlugin from "../plugins/LinkPlugin";
 import SectionEditorPlugin from "../plugins/SectionEditorPlugin";
 import EmbedPlugin from "../plugins/EmbedPlugin";
@@ -38,6 +39,7 @@ export function EditorShell({
       <LexicalTablePlugin />
       <SlashCommandPlugin />
       <ImageUploadPlugin onImageAdded={onImageAdded} useBase64Url={useBase64Url} />
+      <ImageEditorPlugin />
       <LinkPlugin />
       <SectionEditorPlugin />
       <EmbedPlugin />
