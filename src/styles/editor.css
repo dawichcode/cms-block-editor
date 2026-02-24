@@ -87,6 +87,14 @@
   box-shadow: none;
 }
 
+.cms-toolbar-seo {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--cms-color-border, #e5e7eb);
+  background: var(--cms-color-surface, #f9fafb);
+  display: flex;
+  justify-content: flex-end;
+}
+
 /* Content Editable */
 .cms-editor-content {
   min-height: 300px;

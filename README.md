@@ -19,6 +19,7 @@ A powerful, feature-rich block editor for CMS applications built with Lexical an
 📊 **Tables** - Visual table builder with configurable rows/columns and professional styling  
 🎨 **Styling** - Background colors, images, gradients, opacity controls  
 🌈 **Themes** - 10 preset themes with light/dark mode and custom theme support  
+🔍 **SEO Tools** - Complete SEO optimization with meta tags, structured data, and analysis  
 📱 **Responsive** - Mobile-first design with automatic responsive behavior  
 💾 **Export/Import** - HTML and Markdown support  
 🎯 **Section Editor** - Full control over section layout, spacing, and styling  
@@ -79,6 +80,9 @@ Main editor component with full editing capabilities.
 - `onImageAdded?: (file: File) => Promise<string>` - Custom image upload handler that returns the image URL
 - `onVideoAdded?: (file: File) => Promise<string>` - Custom video upload handler that returns the video URL
 - `useBase64Url?: boolean` - Use base64 encoding for images (default: `true`)
+- `seoMetadata?: SEOMetadata` - SEO metadata for the content
+- `onSEOMetadataChange?: (metadata: SEOMetadata) => void` - Callback when SEO metadata changes
+- `showSEO?: boolean` - Show/hide SEO button (default: `true`)
 
 ### CMSRenderer
 
@@ -310,6 +314,59 @@ importFromHTML(editor, '<h1>Hello World</h1>');
 importFromMarkdown(editor, '# Hello World');
 ```
 
+### SEO Optimization
+
+Manage SEO metadata and analyze content:
+
+```typescript
+import { CMSBlockEditor, SEOMetadata } from 'cms-block-editor';
+import { useState } from 'react';
+
+function Editor() {
+  const [content, setContent] = useState('');
+  const [seoMetadata, setSeoMetadata] = useState<SEOMetadata>({
+    title: 'My Page Title',
+    description: 'My page description for search engines',
+    keywords: ['keyword1', 'keyword2', 'keyword3'],
+    ogImage: 'https://example.com/image.jpg',
+    twitterCard: 'summary_large_image',
+  });
+
+  return (
+    <CMSBlockEditor
+      value={content}
+      onChange={setContent}
+      seoMetadata={seoMetadata}
+      onSEOMetadataChange={setSeoMetadata}
+      showSEO={true}
+    />
+  );
+}
+```
+
+**SEO Features**:
+- Meta tags (title, description, keywords, author, canonical)
+- Open Graph tags for social media
+- Twitter Card support
+- Article metadata
+- Schema.org structured data
+- Real-time SEO analysis with scoring
+- Keyword extraction
+- Slug generation
+
+**Programmatic SEO Analysis**:
+```typescript
+import { analyzeSEO, generateMetaTags } from 'cms-block-editor';
+
+// Analyze content
+const analysis = analyzeSEO(htmlContent, metadata);
+console.log('SEO Score:', analysis.score); // 0-100
+
+// Generate meta tags
+const metaTags = generateMetaTags(metadata);
+// Returns HTML string with all meta tags
+```
+
 ## Styling
 
 The editor comes with default styles. Import the CSS file:
@@ -373,7 +430,9 @@ Check out the [example app](./example-app) for a complete implementation with:
 
 Comprehensive guides available:
 - [Features Summary](./docs/FEATURES-SUMMARY.md) - Complete overview of all features
+- [SEO Optimization Guide](./docs/SEO-GUIDE.md) - Complete SEO tools and best practices
 - [Theme System Guide](./docs/THEME-GUIDE.md) - Complete theming and customization
+- [Advanced Theming Guide](./docs/ADVANCED-THEMING-GUIDE.md) - Theme customizer and builder API
 - [Video Upload Guide](./docs/VIDEO-GUIDE.md) - Native HTML5 video upload and playback
 - [Image Editing Guide](./docs/IMAGE-EDITING-GUIDE.md) - Advanced image filters and effects
 - [Section Creator Guide](./SECTION-CREATOR-GUIDE.md)

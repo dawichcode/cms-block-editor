@@ -59,7 +59,38 @@ export type {
   ThemeGradients,
 } from "./themes";
 
+// Export SEO tools
+export { SEOPlugin } from "./plugins/SEOPlugin";
+export {
+  analyzeSEO,
+  generateSlug,
+  extractKeywords,
+  generateMetaTags,
+  generateStructuredData,
+  createDefaultMetadata,
+  mergeMetadata,
+  validateMetadata,
+  copyMetadataToClipboard,
+  downloadMetadata,
+} from "./seo";
+export type {
+  SEOMetadata,
+  SEOAnalysis,
+  SEOIssue,
+  SEOSuggestion,
+  SEOMetrics,
+  SchemaType,
+  ArticleSchema,
+  BreadcrumbSchema,
+  OrganizationSchema,
+  PersonSchema,
+  ProductSchema,
+  FAQSchema,
+  HowToSchema,
+} from "./seo";
+
 import "./styles/editor.css";
 import "./styles/renderer.css";
 import "./styles/themes.css";
 import "./styles/themeCustomizer.css";
+import "./styles/seo.css";

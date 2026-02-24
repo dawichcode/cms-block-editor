@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.16] - 2024-02-21
+
+### Added
+- Comprehensive SEO optimization tools
+- SEOPlugin component with visual SEO manager UI
+- 4 SEO management tabs: Basic, Social, Advanced, Analysis
+- Real-time SEO content analysis with scoring (0-100)
+- Automatic keyword extraction from content
+- SEO-friendly slug generation
+- Meta tag generation (title, description, keywords, author, canonical, robots)
+- Open Graph tags for social media sharing
+- Twitter Card support
+- Article metadata (published time, modified time, author, section, tags)
+- Schema.org structured data support (Article, Breadcrumb, Organization, Person, Product, FAQ, HowTo)
+- SEO validation with error reporting
+- Content metrics (word count, reading time, heading count, image count, link count)
+- Keyword density analysis
+- Copy metadata to clipboard functionality
+- Download metadata as HTML file
+- SEO best practices documentation
+- Complete SEO API with utility functions
+
+### Changed
+- CMSBlockEditor now accepts seoMetadata, onSEOMetadataChange, and showSEO props
+- EditorShell updated to include SEO plugin integration
+- Added SEO button to editor toolbar
+
+### Documentation
+- Added comprehensive SEO-GUIDE.md with examples and best practices
+- API reference for all SEO functions
+- Structured data examples for all schema types
+
 ## [1.0.10] - 2024-02-21
 
 ### Added
@@ -246,7 +278,7 @@ All notable changes to this project will be documented in this file.
 - [ ] Version history
 - [ ] Comments and annotations
 - [ ] More section templates
-- [ ] Theme system
+- [x] Theme system
 - [ ] Plugin architecture
 - [ ] Accessibility improvements
 - [ ] Performance optimizations
