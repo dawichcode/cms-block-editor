@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.10] - 2024-02-21
+
+### Added
+- Advanced ThemeCustomizer component with visual theme editor
+- 6 customization tabs: Colors, Typography, Spacing, Effects, Advanced, Preview
+- Brand color generator with automatic palette creation
+- 90+ customizable theme properties across 10 categories
+- Undo/redo functionality for theme changes
+- Search bar for finding theme properties
+- Advanced color picker with presets
+- Visual previews for shadows, gradients, and border radius
+- Theme import/export functionality
+- Real-time theme preview
+- Theme validation system
+- Expanded theme system to 90+ properties
+- New theme categories: transitions, breakpoints, z-index, animations, gradients
+- Theme Builder API with utility functions
+- ADVANCED-THEMING-GUIDE.md comprehensive documentation
+
+### Changed
+- Theme types expanded with 50+ color properties, 20+ typography properties
+- ThemeCustomizer now includes advanced UI with tabbed interface
+- Example app updated with ThemeCustomizer integration
+- Built and exported themeCustomizer.css for advanced styling
+
+### Fixed
+- TypeScript errors in theme presets borderRadius
+- TypeScript errors in themeBuilder deepMerge function
+- Unused import warnings in ThemeCustomizer
+
+### Documentation
+- Added advanced theming guide with all new features
+- Theme Builder API documentation
+- ThemeCustomizer usage examples
+
 ## [1.0.9] - 2024-02-20
 
 ### Added

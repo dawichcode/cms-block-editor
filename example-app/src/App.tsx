@@ -4,6 +4,7 @@ import {
   CMSRenderer, 
   ThemeProvider, 
   ThemeSwitcher,
+  ThemeCustomizer,
   useTheme 
 } from 'cms-block-editor';
 
@@ -20,6 +21,7 @@ function EditorDemo() {
   const [rendererContent, setRendererContent] = useState<string | undefined>(undefined);
   const [showPreview, setShowPreview] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const [showThemeCustomizer, setShowThemeCustomizer] = useState(false);
 
   const handlePersistenceChange = (editorState: any) => {
     const serialized = JSON.stringify(editorState);
@@ -127,8 +129,23 @@ function EditorDemo() {
               <p>
                 Current theme: <strong>{theme.name}</strong>
                 <br />
-                Try switching themes using the theme switcher in the header!
+                Try switching themes using the theme switcher in the header or customize your own!
               </p>
+              <button 
+                onClick={() => setShowThemeCustomizer(true)}
+                style={{
+                  marginTop: '1rem',
+                  padding: '0.75rem 1.5rem',
+                  background: 'var(--cms-color-primary)',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontWeight: 600,
+                }}
+              >
+                🎨 Open Theme Studio
+              </button>
             </div>
             <CMSBlockEditor 
               value={themesContent}
@@ -145,7 +162,12 @@ function EditorDemo() {
                 <li><strong>Dark Themes:</strong> Dark, Midnight, Dracula, Monokai</li>
               </ul>
               <strong>Modes:</strong> Light, Dark, Auto (follows system preference)
+              <br />
+              <strong>Theme Studio:</strong> Create and customize your own themes with 90+ properties!
             </div>
+            {showThemeCustomizer && (
+              <ThemeCustomizer onClose={() => setShowThemeCustomizer(false)} />
+            )}
           </div>
         )}
 

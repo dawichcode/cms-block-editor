@@ -62,3 +62,4 @@ export type {
 import "./styles/editor.css";
 import "./styles/renderer.css";
 import "./styles/themes.css";
+import "./styles/themeCustomizer.css";
