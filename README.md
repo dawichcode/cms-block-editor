@@ -13,6 +13,7 @@ A powerful, feature-rich block editor for CMS applications built with Lexical an
 📐 **Layouts** - Flexbox and CSS Grid support with visual controls  
 🖼️ **Images** - Upload, resize, drag-and-drop, and advanced editing with filters  
 🎨 **Image Filters** - 7 adjustable filters with 6 professional presets  
+🎬 **Videos** - Native HTML5 video upload with playback controls  
 🎥 **Embeds** - YouTube, Facebook, Instagram, Twitter, TikTok, Vimeo, Spotify, SoundCloud  
 🔗 **Links** - Custom link insertion with labels and options  
 📊 **Tables** - Visual table builder with configurable rows/columns and professional styling  
@@ -73,6 +74,7 @@ Main editor component with full editing capabilities.
 - `value?: string` - Initial editor state (JSON string)
 - `onChange?: (state: any) => void` - Callback fired when content changes
 - `onImageAdded?: (file: File) => Promise<string>` - Custom image upload handler that returns the image URL
+- `onVideoAdded?: (file: File) => Promise<string>` - Custom video upload handler that returns the video URL
 - `useBase64Url?: boolean` - Use base64 encoding for images (default: `true`)
 
 ### CMSRenderer
@@ -97,6 +99,7 @@ Read-only renderer for displaying saved content.
 ### Media
 - **Images**: Upload from computer, resize with 8-point handles, drag-and-drop positioning, custom upload handler support, advanced editing with filters
 - **Image Filters**: Brightness, contrast, saturation, blur, grayscale, sepia, hue rotation with 6 presets
+- **Videos**: Native HTML5 video upload, drag-and-drop, playback controls (autoplay, loop, mute), resize support
 - **YouTube**: Embed videos with custom sizing
 - **Embeds**: Support for 8+ platforms with automatic URL detection
 - **Tables**: Visual builder with configurable dimensions, header rows, and professional styling
@@ -133,6 +136,39 @@ Read-only renderer for displaying saved content.
 - Copy to clipboard
 
 ## Advanced Usage
+
+### Custom Video Upload
+
+Upload videos to your server:
+
+```typescript
+import { CMSBlockEditor } from 'cms-block-editor';
+
+function Editor() {
+  const [content, setContent] = useState('');
+
+  const handleVideoUpload = async (file: File): Promise<string> => {
+    const formData = new FormData();
+    formData.append('video', file);
+    
+    const response = await fetch('/api/upload-video', {
+      method: 'POST',
+      body: formData,
+    });
+    
+    const data = await response.json();
+    return data.url;
+  };
+
+  return (
+    <CMSBlockEditor 
+      value={content}
+      onChange={(state) => setContent(JSON.stringify(state))}
+      onVideoAdded={handleVideoUpload}
+    />
+  );
+}
+```
 
 ### Custom Image Upload
 
@@ -293,6 +329,7 @@ Check out the [example app](./example-app) for a complete implementation with:
 ## Documentation
 
 Comprehensive guides available:
+- [Video Upload Guide](./docs/VIDEO-GUIDE.md) - Native HTML5 video upload and playback
 - [Image Editing Guide](./docs/IMAGE-EDITING-GUIDE.md) - Advanced image filters and effects
 - [Section Creator Guide](./SECTION-CREATOR-GUIDE.md)
 - [Section Editing Guide](./SECTION-EDITING-GUIDE.md)

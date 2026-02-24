@@ -6,20 +6,23 @@ interface CMSBlockEditorProps {
   value?: string;
   onChange?: (state: any) => void;
   onImageAdded?: (file: File) => Promise<string>;
+  onVideoAdded?: (file: File) => Promise<string>;
   useBase64Url?: boolean;
 }
 
 export default function CMSBlockEditor({ 
   value, 
   onChange, 
-  onImageAdded, 
+  onImageAdded,
+  onVideoAdded, 
   useBase64Url = true 
 }: CMSBlockEditorProps) {
   return (
     <LexicalComposer initialConfig={createEditorConfig(value)}>
       <EditorShell 
         onChange={onChange} 
-        onImageAdded={onImageAdded} 
+        onImageAdded={onImageAdded}
+        onVideoAdded={onVideoAdded} 
         useBase64Url={useBase64Url} 
       />
     </LexicalComposer>

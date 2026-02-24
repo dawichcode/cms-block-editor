@@ -14,6 +14,7 @@ import {
 import { $createHeadingNode } from "@lexical/rich-text";
 import { $createListNode, $createListItemNode } from "@lexical/list";
 import { ImageNode } from "../blocks/ImageNode";
+import { VideoNode } from "../blocks/VideoNode";
 import { YouTubeNode } from "../blocks/YouTubeNode";
 import { QuoteNode } from "../blocks/QuoteNode";
 import { ColumnsNode, ColumnNode } from "../blocks/ColumnsNode";
@@ -151,6 +152,37 @@ export default function SlashCommandPlugin() {
               });
             };
             reader.readAsDataURL(file);
+          }
+        };
+        
+        input.click();
+      },
+    },
+    {
+      title: "Video",
+      description: "Insert a video",
+      keywords: ["video", "mp4", "movie", "film"],
+      onSelect: (editor) => {
+        // Create a file input element
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = "video/*";
+        
+        input.onchange = (e: any) => {
+          const file = e.target?.files?.[0];
+          if (file) {
+            // For videos, we should use object URL or upload to server
+            // Base64 is not recommended for large video files
+            const url = URL.createObjectURL(file);
+            
+            editor.update(() => {
+              const selection = $getSelection();
+              if ($isRangeSelection(selection)) {
+                const videoNode = new VideoNode(url);
+                const nodes = [videoNode];
+                selection.insertNodes(nodes);
+              }
+            });
           }
         };
         

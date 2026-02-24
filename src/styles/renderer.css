@@ -852,3 +852,17 @@
     background: #3a3a3a;
   }
 }
+
+/* Video in Renderer */
+.cms-renderer video {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin: 16px 0;
+}
+
+.cms-renderer .video-node-wrapper {
+  display: block;
+  max-width: 100%;
+  margin: 16px 0;
+}

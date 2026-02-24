@@ -89,6 +89,18 @@ function App() {
                 console.log('Image uploaded:', file.name);
                 return `https://via.placeholder.com/800x400?text=${encodeURIComponent(file.name)}`;
               }}
+              onVideoAdded={async (file: File) => {
+                // Example: Upload to your server
+                // const formData = new FormData();
+                // formData.append('video', file);
+                // const response = await fetch('/api/upload-video', { method: 'POST', body: formData });
+                // const data = await response.json();
+                // return data.url;
+                
+                // For demo: use object URL (not recommended for production)
+                console.log('Video uploaded:', file.name);
+                return URL.createObjectURL(file);
+              }}
               useBase64Url={false}
             />
             <div className="info-box">

@@ -10,5 +10,9 @@ export { importFromMarkdown, loadMarkdownFromFile, pasteMarkdownFromClipboard } 
 // Export image editor command
 export { OPEN_IMAGE_EDITOR_COMMAND } from "./plugins/ImageEditorPlugin";
 
+// Export nodes for advanced usage
+export { VideoNode } from "./blocks/VideoNode";
+export { ImageNode } from "./blocks/ImageNode";
+
 import "./styles/editor.css";
 import "./styles/renderer.css";

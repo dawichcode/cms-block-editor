@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.8] - 2024-02-19
+
+### Added
+- Native HTML5 video upload and playback support
+- VideoNode with full playback controls
+- VideoUploadPlugin for drag-and-drop video upload
+- Video settings panel (autoplay, loop, mute, controls)
+- Video resize with aspect ratio preservation
+- Custom video upload handler via `onVideoAdded` prop
+- Slash command `/video` for quick video insertion
+- Support for MP4, WebM, and OGG formats
+- VIDEO-GUIDE.md comprehensive documentation
+
+### Changed
+- EditorConfig now includes VideoNode
+- SlashCommandPlugin includes video command
+- CMSBlockEditor accepts `onVideoAdded` prop
+
+### Documentation
+- Added complete video upload guide
+- Server-side upload examples (Node.js, AWS S3, Cloudinary)
+- Video optimization best practices
+- Accessibility guidelines for videos
+
 ## [1.0.7] - 2024-02-18
 
 ### Added
@@ -154,7 +178,8 @@ All notable changes to this project will be documented in this file.
 - [x] Table support (Added in v1.0.6)
 - [x] Custom image upload handler (Added in v1.0.7)
 - [x] Advanced image editing (crop, filters) (Added in v1.0.7)
-- [ ] Video upload support
+- [x] Video upload support (Added in v1.0.8)
+- [ ] Custom block creation API
 - [ ] Custom block creation API
 - [ ] Collaboration features
 - [ ] Version history

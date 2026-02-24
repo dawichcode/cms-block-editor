@@ -4,6 +4,7 @@ import { AutoLinkNode, LinkNode as LexicalLinkNode } from "@lexical/link";
 import { CodeNode } from "@lexical/code";
 import { TableNode, TableCellNode, TableRowNode } from "@lexical/table";
 import { ImageNode } from "../blocks/ImageNode";
+import { VideoNode } from "../blocks/VideoNode";
 import { QuoteNode } from "../blocks/QuoteNode";
 import { ColumnsNode, ColumnNode } from "../blocks/ColumnsNode";
 import { YouTubeNode } from "../blocks/YouTubeNode";
@@ -40,6 +41,7 @@ export function createEditorConfig(value?: string) {
       TableCellNode,
       TableRowNode,
       ImageNode,
+      VideoNode,
       QuoteNode,
       ColumnsNode,
       ColumnNode,

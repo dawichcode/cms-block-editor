@@ -9,6 +9,7 @@ import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import SlashCommandPlugin from "../plugins/SlashCommandPlugin";
 import ToolbarPlugin from "../plugins/ToolbarPlugin";
 import { ImageUploadPlugin } from "../plugins/ImageUploadPlugin";
+import { VideoUploadPlugin } from "../plugins/VideoUploadPlugin";
 import ImageEditorPlugin from "../plugins/ImageEditorPlugin";
 import LinkPlugin from "../plugins/LinkPlugin";
 import SectionEditorPlugin from "../plugins/SectionEditorPlugin";
@@ -19,10 +20,12 @@ import "../styles/editor.css";
 export function EditorShell({
   onChange,
   onImageAdded,
+  onVideoAdded,
   useBase64Url
 }: {
   onChange?: (state: any) => void;
   onImageAdded?: (file: File) => Promise<string>;
+  onVideoAdded?: (file: File) => Promise<string>;
   useBase64Url?: boolean;
 }) {
   return (
@@ -39,6 +42,7 @@ export function EditorShell({
       <LexicalTablePlugin />
       <SlashCommandPlugin />
       <ImageUploadPlugin onImageAdded={onImageAdded} useBase64Url={useBase64Url} />
+      <VideoUploadPlugin onVideoAdded={onVideoAdded} useBase64Url={useBase64Url} />
       <ImageEditorPlugin />
       <LinkPlugin />
       <SectionEditorPlugin />
