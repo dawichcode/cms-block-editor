@@ -372,6 +372,7 @@ Check out the [example app](./example-app) for a complete implementation with:
 ## Documentation
 
 Comprehensive guides available:
+- [Features Summary](./docs/FEATURES-SUMMARY.md) - Complete overview of all features
 - [Theme System Guide](./docs/THEME-GUIDE.md) - Complete theming and customization
 - [Video Upload Guide](./docs/VIDEO-GUIDE.md) - Native HTML5 video upload and playback
 - [Image Editing Guide](./docs/IMAGE-EDITING-GUIDE.md) - Advanced image filters and effects

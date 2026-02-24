@@ -19,6 +19,7 @@ export {
   ThemeProvider,
   useTheme,
   ThemeSwitcher,
+  ThemeCustomizer,
   lightTheme,
   darkTheme,
   presetThemes,
@@ -30,8 +31,33 @@ export {
   draculaTheme,
   monokaiTheme,
   minimalTheme,
+  createTheme,
+  generateColorVariations,
+  createGradient,
+  generatePalette,
+  validateTheme,
+  exportTheme,
+  importTheme,
+  themeToCSSVariables,
+  generateThemeFromBrand,
 } from "./themes";
-export type { Theme, ThemeColors, ThemeMode, PresetThemeName } from "./themes";
+export type { 
+  Theme, 
+  ThemeColors, 
+  ThemeMode, 
+  PresetThemeName,
+  ThemeOverride,
+  ThemeConfig,
+  ThemeTypography,
+  ThemeSpacing,
+  ThemeBorderRadius,
+  ThemeShadows,
+  ThemeTransitions,
+  ThemeBreakpoints,
+  ThemeZIndex,
+  ThemeAnimations,
+  ThemeGradients,
+} from "./themes";
 
 import "./styles/editor.css";
 import "./styles/renderer.css";

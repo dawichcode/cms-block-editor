@@ -1,124 +1,319 @@
-# 🚀 Quick Start Guide
+# Quick Start Guide
 
-Your CMS Block Editor demo is now running!
+Get up and running with CMS Block Editor in 5 minutes.
 
-## ✅ What's Running
-
-The development server is live at: **http://localhost:5174/**
-
-## 🎯 What You'll See
-
-The demo app has 3 tabs showcasing different implementations:
-
-### 1. **Basic** Tab
-- Minimal editor setup
-- Type `/` to see slash commands
-- Real-time character count
-- **Upload Image button** in toolbar
-
-### 2. **With Persistence** Tab  
-- Auto-saves to localStorage
-- Refresh the page - your content persists!
-- Visual save indicator
-- Clear content button
-
-### 3. **Custom Styled** Tab
-- Themed editor with gradient styling
-- Custom block styles
-- Content statistics
-
-## 🎨 Try These Features
-
-1. **Slash Commands** - Type `/` anywhere to insert blocks
-2. **Upload Images** - Click the "📷 Upload Image" button in the toolbar
-3. **Drag & Drop Images** - Drag image files directly into the editor
-4. **Image from URL** - Type `/image` and select "Image from URL"
-5. **Rich Text** - Use standard keyboard shortcuts (Cmd+B for bold, etc.)
-6. **Undo/Redo** - Cmd+Z / Cmd+Shift+Z
-7. **Persistence** - Switch to tab 2, type something, refresh the page!
-
-## 📸 Adding Images (3 Ways!)
-
-### Method 1: Toolbar Button
-1. Click the "📷 Upload Image" button
-2. Select an image from your computer
-3. Image is inserted as base64
-
-### Method 2: Drag & Drop
-1. Drag an image file from your computer
-2. Drop it anywhere in the editor
-3. Image is automatically inserted
-
-### Method 3: Slash Command
-1. Type `/image` 
-2. Choose "Image" for file upload
-3. Or choose "Image from URL" to paste a URL
-
-## 📁 Project Structure
-
-```
-cms/
-├── src/                    # Your editor source code
-│   ├── blocks/            # Custom block nodes
-│   ├── core/              # Core editor components
-│   └── plugins/           # Editor plugins
-├── example-app/           # Demo application (currently running)
-│   └── src/
-│       ├── App.tsx        # Main demo with tabs
-│       └── App.css        # Styling
-└── examples/              # Standalone examples
-```
-
-## 🛠️ Development Commands
+## Installation
 
 ```bash
-# Stop the dev server
-# (Use Ctrl+C in the terminal or stop the process)
-
-# Restart the dev server
-cd example-app
-npm run dev
-
-# Build the editor package
-cd ..
-npm run build
-
-# Build the demo for production
-cd example-app
-npm run build
-npm run preview
+npm install cms-block-editor
 ```
 
-## 📝 Next Steps
+## Basic Setup
 
-1. **Explore the code** - Check out `example-app/src/App.tsx`
-2. **Customize styling** - Edit `example-app/src/App.css`
-3. **Add features** - Modify the editor in `src/`
-4. **Read the docs** - See `README.md` and `examples/README.md`
+### 1. Import and Use
 
-## 🐛 Troubleshooting
+```typescript
+import { CMSBlockEditor } from 'cms-block-editor';
+import 'cms-block-editor/dist/index.css';
+import { useState } from 'react';
 
-**Port already in use?**
-```bash
-# Kill the process on port 5173
-lsof -ti:5173 | xargs kill -9
+function App() {
+  const [content, setContent] = useState('');
+
+  return (
+    <CMSBlockEditor 
+      value={content}
+      onChange={(editorState) => {
+        setContent(JSON.stringify(editorState));
+      }}
+    />
+  );
+}
+
+export default App;
 ```
 
-**Module not found?**
+That's it! You now have a fully functional editor.
+
+## Add Themes (Optional)
+
+```typescript
+import { CMSBlockEditor, ThemeProvider } from 'cms-block-editor';
+import 'cms-block-editor/dist/index.css';
+
+function App() {
+  const [content, setContent] = useState('');
+
+  return (
+    <ThemeProvider defaultTheme="ocean" defaultMode="auto">
+      <CMSBlockEditor 
+        value={content}
+        onChange={(state) => setContent(JSON.stringify(state))}
+      />
+    </ThemeProvider>
+  );
+}
+```
+
+## Add Theme Switcher (Optional)
+
+```typescript
+import { 
+  CMSBlockEditor, 
+  ThemeProvider, 
+  ThemeSwitcher 
+} from 'cms-block-editor';
+
+function App() {
+  const [content, setContent] = useState('');
+
+  return (
+    <ThemeProvider defaultTheme="light">
+      <div>
+        <ThemeSwitcher />
+        <CMSBlockEditor 
+          value={content}
+          onChange={(state) => setContent(JSON.stringify(state))}
+        />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+## Add Custom Upload Handlers (Recommended)
+
+```typescript
+import { CMSBlockEditor, ThemeProvider } from 'cms-block-editor';
+
+function App() {
+  const [content, setContent] = useState('');
+
+  const handleImageUpload = async (file: File): Promise<string> => {
+    const formData = new FormData();
+    formData.append('image', file);
+    
+    const response = await fetch('/api/upload-image', {
+      method: 'POST',
+      body: formData,
+    });
+    
+    const data = await response.json();
+    return data.url;
+  };
+
+  const handleVideoUpload = async (file: File): Promise<string> => {
+    const formData = new FormData();
+    formData.append('video', file);
+    
+    const response = await fetch('/api/upload-video', {
+      method: 'POST',
+      body: formData,
+    });
+    
+    const data = await response.json();
+    return data.url;
+  };
+
+  return (
+    <ThemeProvider>
+      <CMSBlockEditor 
+        value={content}
+        onChange={(state) => setContent(JSON.stringify(state))}
+        onImageAdded={handleImageUpload}
+        onVideoAdded={handleVideoUpload}
+        useBase64Url={false}
+      />
+    </ThemeProvider>
+  );
+}
+```
+
+## Render Content (Read-Only)
+
+```typescript
+import { CMSRenderer } from 'cms-block-editor';
+import 'cms-block-editor/dist/index.css';
+
+function BlogPost({ content }: { content: string }) {
+  return (
+    <article>
+      <CMSRenderer content={content} />
+    </article>
+  );
+}
+```
+
+## Complete Example
+
+```typescript
+import { useState } from 'react';
+import { 
+  CMSBlockEditor, 
+  CMSRenderer,
+  ThemeProvider, 
+  ThemeSwitcher 
+} from 'cms-block-editor';
+import 'cms-block-editor/dist/index.css';
+
+function App() {
+  const [content, setContent] = useState('');
+  const [isPreview, setIsPreview] = useState(false);
+
+  const handleImageUpload = async (file: File) => {
+    // Upload to your server
+    const formData = new FormData();
+    formData.append('image', file);
+    const res = await fetch('/api/upload', { 
+      method: 'POST', 
+      body: formData 
+    });
+    const data = await res.json();
+    return data.url;
+  };
+
+  const handleVideoUpload = async (file: File) => {
+    // Upload to your server
+    const formData = new FormData();
+    formData.append('video', file);
+    const res = await fetch('/api/upload-video', { 
+      method: 'POST', 
+      body: formData 
+    });
+    const data = await res.json();
+    return data.url;
+  };
+
+  return (
+    <ThemeProvider defaultTheme="ocean" defaultMode="auto">
+      <div className="app">
+        <header>
+          <h1>My CMS</h1>
+          <div className="actions">
+            <ThemeSwitcher />
+            <button onClick={() => setIsPreview(!isPreview)}>
+              {isPreview ? 'Edit' : 'Preview'}
+            </button>
+          </div>
+        </header>
+
+        <main>
+          {!isPreview ? (
+            <CMSBlockEditor 
+              value={content}
+              onChange={(state) => setContent(JSON.stringify(state))}
+              onImageAdded={handleImageUpload}
+              onVideoAdded={handleVideoUpload}
+              useBase64Url={false}
+            />
+          ) : (
+            <CMSRenderer content={content} />
+          )}
+        </main>
+      </div>
+    </ThemeProvider>
+  );
+}
+
+export default App;
+```
+
+## Next Steps
+
+### Try These Features
+
+1. **Type `/` in the editor** to see slash commands
+2. **Drag and drop an image** to upload it
+3. **Click on an image** and select "Edit" to apply filters
+4. **Upload a video** using `/video` command
+5. **Switch themes** using the theme switcher
+6. **Create a table** using `/table` command
+7. **Add a section** using `/section` command
+
+### Explore Documentation
+
+- [Features Summary](./FEATURES-SUMMARY.md) - All features overview
+- [Theme Guide](./THEME-GUIDE.md) - Theming and customization
+- [Video Guide](./VIDEO-GUIDE.md) - Video upload and playback
+- [Image Editing Guide](./IMAGE-EDITING-GUIDE.md) - Image filters and effects
+
+### Run Example App
+
 ```bash
 cd example-app
 npm install
+npm run dev
 ```
 
-**Changes not showing?**
-- Hard refresh: Cmd+Shift+R
-- Clear cache and reload
+Visit `http://localhost:5173` to see all features in action.
 
-## 💡 Tips
+## Common Use Cases
 
-- The editor uses Lexical under the hood
-- All custom blocks are in `src/blocks/`
-- Slash commands are defined in `src/plugins/SlashCommandPlugin.tsx`
-- The demo links directly to your source code via Vite aliases
+### Blog/CMS
 
-Enjoy building with the CMS Block Editor! 🎉
+```typescript
+<CMSBlockEditor 
+  value={post.content}
+  onChange={(state) => savePost({ ...post, content: JSON.stringify(state) })}
+  onImageAdded={uploadToS3}
+/>
+```
+
+### Documentation
+
+```typescript
+<ThemeProvider defaultTheme="minimal">
+  <CMSBlockEditor 
+    value={doc.content}
+    onChange={(state) => updateDoc(state)}
+  />
+</ThemeProvider>
+```
+
+### Marketing Pages
+
+```typescript
+<ThemeProvider defaultTheme="sunset">
+  <CMSBlockEditor 
+    value={page.content}
+    onChange={(state) => savePage(state)}
+    onImageAdded={uploadToCDN}
+    onVideoAdded={uploadToCDN}
+  />
+</ThemeProvider>
+```
+
+## Troubleshooting
+
+### Styles not loading
+Make sure you import the CSS:
+```typescript
+import 'cms-block-editor/dist/index.css';
+```
+
+### Theme not applying
+Wrap your app with ThemeProvider:
+```typescript
+<ThemeProvider defaultTheme="light">
+  <App />
+</ThemeProvider>
+```
+
+### Upload not working
+Provide upload handlers:
+```typescript
+<CMSBlockEditor 
+  onImageAdded={handleImageUpload}
+  onVideoAdded={handleVideoUpload}
+/>
+```
+
+## Support
+
+- [GitHub Issues](https://github.com/yourusername/cms-block-editor/issues)
+- [Full Documentation](../README.md)
+- [Example App](../example-app)
+
+---
+
+**Happy Editing!** 🚀

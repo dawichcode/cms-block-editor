@@ -1,72 +1,201 @@
-# CMS Block Editor Demo App
+# CMS Block Editor - Example App
 
-This is a demo application showcasing the CMS Block Editor in action.
+This is a comprehensive demo application showcasing all features of the CMS Block Editor.
 
-## Getting Started
+## Features Demonstrated
 
-### 1. Install dependencies
+### 1. Basic Editor
+- Rich text editing
+- Slash commands (`/`)
+- All formatting options
+- Basic setup example
+
+### 2. Theme System
+- 10 preset themes
+- Light/Dark mode toggle
+- Auto mode (follows system preference)
+- Live theme switching
+- Custom theme support
+
+### 3. Media Upload
+- Image upload with drag & drop
+- Image editing with filters
+- Video upload support
+- Resize functionality
+- Custom upload handlers
+
+### 4. Persistence
+- Auto-save to localStorage
+- Content restoration on refresh
+- Clear content functionality
+
+### 5. Renderer
+- Read-only content display
+- Edit/Preview toggle
+- Production-ready rendering
+
+## Running the Demo
+
+### Install Dependencies
 
 ```bash
-cd example-app
 npm install
 ```
 
-### 2. Install Lexical dependencies
-
-The editor requires Lexical packages:
-
-```bash
-npm install lexical @lexical/react @lexical/rich-text @lexical/list
-```
-
-### 3. Run the development server
+### Start Development Server
 
 ```bash
 npm run dev
 ```
 
-The app will open at `http://localhost:5173`
+The app will be available at `http://localhost:5173`
 
-## What's Included
+### Build for Production
 
-This demo includes three example implementations:
-
-1. **Basic** - Minimal setup showing core functionality
-2. **With Persistence** - Auto-save to localStorage with visual feedback
-3. **Custom Styled** - Themed editor with custom CSS
-
-## Features to Try
-
-- Type `/` to open the slash command menu
-- Try different block types (headings, lists, quotes)
-- Test the persistence by refreshing the page
-- Explore the custom styling in the third tab
+```bash
+npm run build
+```
 
 ## Project Structure
 
 ```
 example-app/
 ├── src/
-│   ├── App.tsx          # Main demo app with tabs
-│   ├── App.css          # Styling for the demo
-│   ├── main.tsx         # React entry point
-│   └── index.css        # Global styles
+│   ├── App.tsx          # Main application with all demos
+│   ├── App.css          # Application styles
+│   ├── index.css        # Global styles with theme support
+│   └── main.tsx         # Entry point
 ├── index.html           # HTML template
-├── vite.config.ts       # Vite configuration
-└── package.json         # Dependencies
+├── package.json         # Dependencies
+├── tsconfig.json        # TypeScript config
+└── vite.config.ts       # Vite config
 ```
 
-## Building for Production
+## Key Features to Try
 
-```bash
-npm run build
-npm run preview
+### Slash Commands
+Type `/` in the editor to see available commands:
+- `/h1`, `/h2`, `/h3` - Headings
+- `/image` - Insert image
+- `/video` - Insert video
+- `/table` - Insert table
+- `/quote` - Insert quote
+- And more!
+
+### Image Editing
+1. Upload or drag an image into the editor
+2. Click on the image to select it
+3. Click the "Edit" button
+4. Try different filters and presets
+5. Apply changes
+
+### Video Upload
+1. Type `/video` or drag a video file
+2. Click on the video to select it
+3. Click "Settings" to configure playback
+4. Adjust autoplay, loop, mute, and controls
+
+### Theme Switching
+1. Click the theme switcher in the header
+2. Try different preset themes
+3. Toggle between light and dark modes
+4. Enable auto mode to follow system preference
+
+### Content Persistence
+1. Go to the "Persistence" tab
+2. Add some content
+3. Wait for the "Saved" indicator
+4. Refresh the page
+5. Your content is still there!
+
+## Customization
+
+### Custom Theme Example
+
+```typescript
+import { Theme, lightTheme } from 'cms-block-editor';
+
+const myTheme: Theme = {
+  ...lightTheme,
+  name: 'my-theme',
+  colors: {
+    ...lightTheme.colors,
+    primary: '#your-color',
+    primaryHover: '#your-hover-color',
+  },
+};
+
+<ThemeProvider defaultTheme={myTheme}>
+  <App />
+</ThemeProvider>
 ```
+
+### Custom Upload Handler
+
+```typescript
+const handleImageUpload = async (file: File): Promise<string> => {
+  const formData = new FormData();
+  formData.append('image', file);
+  
+  const response = await fetch('/api/upload', {
+    method: 'POST',
+    body: formData,
+  });
+  
+  const data = await response.json();
+  return data.url;
+};
+
+<CMSBlockEditor 
+  onImageAdded={handleImageUpload}
+  onVideoAdded={handleVideoUpload}
+/>
+```
+
+## Technologies Used
+
+- React 18
+- TypeScript
+- Vite
+- CMS Block Editor
+- Lexical
+
+## Browser Support
+
+- Chrome/Edge (latest)
+- Firefox (latest)
+- Safari (latest)
+- Mobile browsers
+
+## Performance Tips
+
+1. Use custom upload handlers for production
+2. Compress images before upload
+3. Use CDN for media files
+4. Enable lazy loading for large content
 
 ## Troubleshooting
 
-If you encounter module resolution issues:
+### Theme not applying
+- Make sure ThemeProvider wraps your app
+- Check that CSS is imported
 
-1. Make sure you're in the `example-app` directory
-2. Ensure all dependencies are installed
-3. Check that the parent package is built: `cd .. && npm run build`
+### Upload not working
+- Provide onImageAdded/onVideoAdded props
+- Check console for errors
+- Verify file types are supported
+
+### Content not persisting
+- Check localStorage permissions
+- Verify storageKey is provided to ThemeProvider
+
+## Learn More
+
+- [Main Documentation](../README.md)
+- [Theme Guide](../docs/THEME-GUIDE.md)
+- [Video Guide](../docs/VIDEO-GUIDE.md)
+- [Image Editing Guide](../docs/IMAGE-EDITING-GUIDE.md)
+
+## License
+
+MIT
